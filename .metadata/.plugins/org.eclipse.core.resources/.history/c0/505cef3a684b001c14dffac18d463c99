@@ -1,0 +1,16 @@
+package com.test.hospital.utils;
+
+import java.util.List;
+
+public class PageResponse<DTO> {
+
+	private List<DTO> content;
+	private long count;
+	private long totalCount;
+
+	public PageResponse(final List<DTO> content, final long count, final long totalCount) {
+		this.content = content;
+		this.count = count;
+		this.totalCount = totalCount;
+	}
+}

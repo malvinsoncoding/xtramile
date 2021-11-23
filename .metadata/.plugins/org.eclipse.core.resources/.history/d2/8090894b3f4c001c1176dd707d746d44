@@ -1,0 +1,21 @@
+package com.test.hospital.patient.service;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
+import com.test.hospital.patient.repository.PatientRepository;
+
+public class PatientServiceTest {
+
+	@Mock
+	PatientRepository patientRepository;
+	
+	@InjectMocks
+	PatientService patientService;
+	
+	@BeforeEach
+	void setUp() throws Exception {
+		
+	}
+}

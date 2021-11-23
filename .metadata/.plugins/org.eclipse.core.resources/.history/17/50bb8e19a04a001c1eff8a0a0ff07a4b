@@ -1,0 +1,42 @@
+package com.test.hospital.patient.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.test.hospital.patient.entity.Patient;
+import com.test.hospital.patient.repository.PatientRepository;
+import com.test.hospital.patient.rest.PatientDTO;
+import com.test.hospital.utils.ResponseStatus;
+
+@Service
+@Transactional
+public class PatientService {
+
+	@Autowired
+	private PatientRepository patientRepository;
+	private ResponseStatus responseStatus = new ResponseStatus();
+
+	public List<PatientDTO> getPatients() {
+		List<Patient> patients = patientRepository.findAll();
+		List<PatientDTO> dtos = new ArrayList();
+		for (Patient patient : patients) {
+			PatientDTO dto = new PatientDTO();
+			BeanUtils.copyProperties(patient, dto);
+			dtos.add(dto);
+		}
+		return dtos;
+	}
+	
+	public ResponseStatus createPatientData(PatientDTO dto) {
+		Patient patient = new Patient();
+		BeanUtils.copyProperties(dto, patient);
+		patientRepository.save(patient);
+		responseStatus
+		return dto;
+	}
+}

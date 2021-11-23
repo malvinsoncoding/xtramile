@@ -1,0 +1,7 @@
+package com.test.hospital.utils;
+
+public interface Static {
+
+	String SUCCESS = "Success";
+	String SUCCESS_CREATE = "Patient Data has successfully created";
+}

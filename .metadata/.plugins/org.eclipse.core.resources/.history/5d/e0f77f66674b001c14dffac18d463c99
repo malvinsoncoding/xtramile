@@ -1,0 +1,7 @@
+package com.test.hospital.utils;
+
+import org.springframework.data.domain.AbstractPageRequest;
+
+public class PageRequest extends AbstractPageRequest {
+
+}

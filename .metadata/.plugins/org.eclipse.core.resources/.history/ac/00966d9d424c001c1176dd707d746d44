@@ -1,0 +1,58 @@
+package com.test.hospital.patient.service;
+
+import static org.mockito.Mockito.when;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.UUID;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+
+import com.test.hospital.patient.entity.Patient;
+import com.test.hospital.patient.repository.PatientRepository;
+
+public class PatientServiceTest {
+
+	@Mock
+	PatientRepository patientRepository;
+
+	@InjectMocks
+	PatientService patientService;
+
+	Patient patient;
+	List<Patient> patients;
+
+	@BeforeEach
+	void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		patient.setPid(UUID.randomUUID().toString());
+		patient.setFullName("John Doe");
+		patient.setDateOfBirth(new SimpleDateFormat("yyyy-MM-dd").parse("2021-11-10"));
+		patient.setGender("Male");
+		patient.setAddress("This Address");
+		patient.setSuburb("This suburb");
+		patient.setState("This State");
+		patient.setPostcode("123456");
+		patient.setPhoneNo("+12345678910");
+		patient.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+
+		patients.add(patient);
+	}
+
+	@Test
+	final void testGetPatientsPaging() {
+		int page = 0;
+		int size = 10;
+		Page<Patient> pagedResponse = new PageImpl<Patient>(patients);
+
+		when(patientRepository.queryFindAll(PageRequest.of(0, 0))).thenReturn(null);
+	}
+}

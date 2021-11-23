@@ -1,0 +1,13 @@
+package com.test.hospital.utils;
+
+public final class SearchRequestUtil {
+
+	private SearchRequestUtil() {
+	}
+
+	public static PageRequest toPageRequest(final SearchRequest request) {
+		if (request == null) {
+
+		}
+	}
+}

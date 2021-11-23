@@ -1,0 +1,57 @@
+<h2>Patient List</h2>
+<form class="form-inline waves-light" mdbWavesEffect>
+    <div class="md-form mt-0">
+      <input class="form-control mr-sm-2" type="text" id="idOrName"
+      [(ngModel)] = "patient.idOrName" name="idOrName" placeholder="Search" (keyup.enter)="search(patient.idOrName)">
+    </div>
+</form>
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th>Patient ID</th>
+            <th>Full Name</th>
+            <th>Date of Birth</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody> 
+        <tr *ngFor = "let patient of patients">
+            <td>{{patient.pid}}</td>
+            <td>{{patient.firstName}} {{patient.lastName}}</td>
+            <td>{{patient.dateOfBirth}}</td>
+            <td>
+                <button (click) = "detailPatient(patient.pid)" class="btn btn-info">Detail</button>
+                <button (click) = "updatePatient(patient.pid)" class="btn btn-info" style="margin-left: 10px">Update</button>
+                <button (click) = "deletePatient(patient.pid)" class="btn btn-danger" style="margin-left: 10px">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <div *ngIf="isPrevDisabled() else prevEnabled">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+    </div>
+    <ng-template #prevEnabled>
+        <li class="page-item">
+            <a class="page-link" (click)="goPrevious()">Previous</a>
+        </li>
+    </ng-template>
+
+    <li *ngIf="pageUI" class="page-item"><a class="page-link">{{pageUI}}</a></li>
+
+    <div *ngIf="isNextDisabled() else nextEnabled">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Next</a>
+        </li>
+    </div>
+    <ng-template #nextEnabled>
+        <li class="page-item">
+            <a class="page-link" (click)="goNext()">Next</a>
+        </li>
+    </ng-template>
+  </ul>
+</nav>

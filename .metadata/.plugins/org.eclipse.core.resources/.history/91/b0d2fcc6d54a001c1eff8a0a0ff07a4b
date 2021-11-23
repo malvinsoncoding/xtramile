@@ -1,0 +1,44 @@
+package com.test.hospital.patient.rest;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.test.hospital.patient.service.PatientService;
+import com.test.hospital.utils.ResponseStatus;
+
+@RestController
+@RequestMapping("/api/v1/")
+public class PatientRest {
+
+	@Autowired
+	PatientService patientService;
+
+	@GetMapping("/getPatients")
+	public List<PatientDTO> getPatients(@RequestParam(value = "idOrName", required = false) String idOrName) {
+		return patientService.getPatients(idOrName);
+	}
+
+	@PostMapping("/createPatient")
+	public ResponseStatus createPatientData(@RequestBody PatientDTO dto) {
+		return patientService.createPatientData(dto);
+	}
+
+	@PostMapping("/updatePatient")
+	public ResponseStatus updatePatientData(@RequestBody PatientDTO dto) {
+		return patientService.updatePatientData(dto);
+	}
+
+	@DeleteMapping("/deletePatient/{pid}")
+	public ResponseStatus deletePatientData(@PathVariable String pid) {
+		return patientService.deletePatientData(pid);
+	}
+}

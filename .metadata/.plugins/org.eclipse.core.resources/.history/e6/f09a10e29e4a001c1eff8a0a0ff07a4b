@@ -1,0 +1,24 @@
+package com.test.hospital.patient.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.test.hospital.patient.entity.Patient;
+import com.test.hospital.patient.repository.PatientRepository;
+import com.test.hospital.patient.rest.PatientDTO;
+
+@Service
+@Transactional
+public class PatientService {
+
+
+	@Autowired
+	private PatientRepository patientRepository;
+	
+	public List<PatientDTO> getPatients() {
+		List<Patient> patients = patientRepository.findAll();
+	}
+}

@@ -1,0 +1,5 @@
+package com.test.hospital.patient.service;
+
+public class PatientServiceTest {
+
+}

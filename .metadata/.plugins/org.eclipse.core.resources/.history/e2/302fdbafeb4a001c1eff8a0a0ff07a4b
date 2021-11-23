@@ -1,0 +1,74 @@
+package com.test.hospital.patient.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import com.test.hospital.patient.entity.Patient;
+import com.test.hospital.patient.repository.PatientRepository;
+import com.test.hospital.patient.rest.PatientDTO;
+import com.test.hospital.utils.ResponseStatus;
+import com.test.hospital.utils.Static;
+
+@Service
+@Transactional
+public class PatientService {
+
+	@Autowired
+	private PatientRepository patientRepository;
+	private ResponseStatus responseStatus = new ResponseStatus();
+
+	public List<PatientDTO> getPatients(String idOrName) {
+		List<PatientDTO> dtos = new ArrayList();
+		List<Patient> patients = new ArrayList();
+		if (StringUtils.isEmpty(idOrName)) {
+			patients = patientRepository.findAll();
+		} else {
+			if (idOrName.contains("-")) {
+				patients.add(patientRepository.getById(idOrName));
+			} else {
+				patients = patientRepository.searchPatientsByName(idOrName);
+			}
+		}
+		for (Patient patient : patients) {
+			PatientDTO dto = new PatientDTO();
+			BeanUtils.copyProperties(patient, dto);
+			String[] name = patient.getFullName().split(" ");
+			dto.setFirstName(name[0]);
+			dto.setLastName(name[1]);
+			dtos.add(dto);
+		}
+		return dtos;
+	}
+
+	public ResponseStatus createPatientData(PatientDTO dto) {
+		Patient patient = new Patient();
+		BeanUtils.copyProperties(dto, patient);
+		patient.setFullName(dto.getFirstName().concat(" ").concat(dto.getLastName()));
+		patientRepository.save(patient);
+		responseStatus.setMessage(Static.SUCCESS_CREATE);
+		responseStatus.setStatus(Static.SUCCESS);
+		return responseStatus;
+	}
+
+	public ResponseStatus updatePatientData(PatientDTO dto) {
+		Patient patient = patientRepository.getById(dto.getPid());
+		BeanUtils.copyProperties(dto, patient);
+		patient.setFullName(dto.getFirstName().concat(" ").concat(dto.getLastName()));
+		responseStatus.setMessage(Static.SUCCESS_UPDATE);
+		responseStatus.setStatus(Static.SUCCESS);
+		return responseStatus;
+	}
+
+	public ResponseStatus deletePatientData(String pid) {
+		patientRepository.deleteById(pid);
+		responseStatus.setMessage(Static.SUCCESS_DELETE);
+		responseStatus.setStatus(Static.SUCCESS);
+		return responseStatus;
+	}
+}

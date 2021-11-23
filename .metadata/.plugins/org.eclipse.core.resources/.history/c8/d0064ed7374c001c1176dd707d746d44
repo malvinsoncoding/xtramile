@@ -1,0 +1,37 @@
+package com.test.hospital.patient.rest;
+
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import com.test.hospital.patient.service.PatientService;
+
+public class PatientRestTest {
+
+	@InjectMocks
+	PatientRest patientRest;
+
+	@Mock
+	PatientService patientService;
+	
+	List<PatientDTO> dtos;
+	PatientDTO dto;
+
+	@BeforeEach
+	void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		dto = new PatientDTO();
+		
+	}
+	
+	@Test
+	final void testGetPatients() {
+		when(patientService.getPatients(null)).thenReturn(dtos);
+	}
+}

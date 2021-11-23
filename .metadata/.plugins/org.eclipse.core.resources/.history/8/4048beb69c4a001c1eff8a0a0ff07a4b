@@ -1,0 +1,75 @@
+package com.test.hospital.patient.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import com.test.hospital.address.entity.Address;
+
+public class Patient implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3009471265807716160L;
+	private String pid;
+	private String firstName;
+	private String lastName;
+	private Date dateOfBirth;
+	private String gender;
+	private Address address;
+
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Patient [pid=" + pid + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
+				+ dateOfBirth + ", gender=" + gender + ", address=" + address + "]";
+	}
+
+}

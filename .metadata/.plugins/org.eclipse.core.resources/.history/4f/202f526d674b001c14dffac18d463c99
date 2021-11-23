@@ -1,0 +1,12 @@
+package com.test.hospital.utils;
+
+import org.springframework.data.domain.AbstractPageRequest;
+
+public class PageRequest extends AbstractPageRequest {
+
+	public PageRequest(int page, int size) {
+		super(page, size);
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,7 @@
+package com.test.hospital.utils;
+
+public final class SearchRequestUtil {
+
+	private SearchRequestUtil() {
+	}
+}

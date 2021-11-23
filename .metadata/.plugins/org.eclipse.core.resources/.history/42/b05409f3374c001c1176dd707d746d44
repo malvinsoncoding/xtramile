@@ -1,0 +1,50 @@
+package com.test.hospital.patient.rest;
+
+import static org.mockito.Mockito.when;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import com.test.hospital.patient.service.PatientService;
+
+public class PatientRestTest {
+
+	@InjectMocks
+	PatientRest patientRest;
+
+	@Mock
+	PatientService patientService;
+	
+	List<PatientDTO> dtos;
+	PatientDTO dto;
+
+	@BeforeEach
+	void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		dto = new PatientDTO();
+		dto.setPid(UUID.randomUUID().toString());
+		dto.setFirstName("John");
+		dto.setLastName("Doe");
+		dto.setDateOfBirth("2021-11-23");
+		dto.setGender("Male");
+		dto.setAddress("This Address");
+		dto.setSuburb("This Suburb");
+		dto.setState("This State");
+		dto.setPostcode("123456");
+		dto.setPhoneNo("+12345678910");
+		dto.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+	}
+	
+	@Test
+	final void testGetPatients() {
+		when(patientService.getPatients(null)).thenReturn(dtos);
+	}
+}

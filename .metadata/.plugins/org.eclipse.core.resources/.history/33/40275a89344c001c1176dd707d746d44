@@ -1,0 +1,30 @@
+package com.test.hospital.patient.rest;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import com.test.hospital.patient.service.PatientService;
+
+public class PatientRestTest {
+
+	@InjectMocks
+	PatientRest patientRest;
+
+	@Mock
+	PatientService patientService;
+
+	@BeforeEach
+	void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+
+		
+	}
+	
+	@Test
+	final void testGetPatients() {
+		
+	}
+}
